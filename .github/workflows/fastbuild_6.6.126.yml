@@ -135,7 +135,7 @@ jobs:
           aria2c -s16 -x16 -k1M https://github.com/EricZhang1092/kernel_builder_useable/releases/download/Zyc21/Clang-21.0.0git-20250715.zip -o clang.zip &&
           unzip -q clang.zip -d clang18 &&
           chmod +x clang18/bin/* &&
-          rm -rf clang.zip &
+          rm -rf clang.zip & 
           
           echo "正在克隆构建工具..." &&
           aria2c -s16 -x16 -k1M https://github.com/cctv18/oneplus_sm8650_toolchain/releases/download/LLVM-Clang18-r510928/build-tools.zip -o build-tools.zip &&
