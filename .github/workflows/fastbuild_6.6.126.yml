@@ -135,6 +135,7 @@ jobs:
           aria2c -s16 -x16 -k1M https://github.com/EricZhang1092/kernel_builder_useable/releases/download/Zyc19/Clang-19.0.0git-20240723.zip -o clang.zip &&
           unzip -q clang.zip -d clang18 &&
           sudo chmod +x clang18/bin/* &&
+          sudo chmod +x clang18/* &&
           rm -rf clang.zip & 
           
           echo "正在克隆构建工具..." &&
