@@ -132,10 +132,9 @@ jobs:
           
           echo "正在克隆llvm-clang18工具链..." &&
           mkdir -p clang18 &&
-          aria2c -s16 -x16 -k1M https://github.com/EricZhang1092/kernel_builder_useable/releases/download/Zyc19/Clang-19.0.0git-20240723.zip -o clang.zip &&
-          unzip -q clang.zip -d clang18 &&
-          sudo chmod +x clang18/bin/* &&
-          sudo chmod +x clang18/* &&
+          git clone  -depth=1 -jobs=8 https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+/refs/heads/main/clang-r547379/ $WORKDIR/kernel_workspace/clang &&
+          sudo chmod +x clang/bin/* &&
+          sudo chmod +x clang/* &&
           rm -rf clang.zip & 
           
           echo "正在克隆构建工具..." &&
@@ -555,12 +554,12 @@ jobs:
         run: |
           WORKDIR="$(pwd)"
           export PATH="/usr/lib/ccache:$PATH"
-          export PATH="$WORKDIR/kernel_workspace/clang18/bin:$PATH"
+          export PATH="$WORKDIR/kernel_workspace/clang/bin:$PATH"
           export PATH="$WORKDIR/kernel_workspace/build-tools/bin:$PATH"
           # 在第 558 行后添加
-          export LD="$WORKDIR/kernel_workspace/clang18/bin/ld.lld"
-          export HOSTLD="$WORKDIR/kernel_workspace/clang18/bin/ld.lld"
-          CLANG_DIR="$WORKDIR/kernel_workspace/clang18/bin"
+          export LD="$WORKDIR/kernel_workspace/clang/bin/ld.lld"
+          export HOSTLD="$WORKDIR/kernel_workspace/clang/bin/ld.lld"
+          CLANG_DIR="$WORKDIR/kernel_workspace/clang/bin"
           CLANG_VERSION="$($CLANG_DIR/clang --version | head -n 1)"
           LLD_VERSION="$($CLANG_DIR/ld.lld --version | head -n 1)"
           echo "编译器信息:"
